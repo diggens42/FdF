@@ -28,6 +28,7 @@ t_fdf	init_fdf(void)
 
 	fdf.mlx = NULL;
 	fdf.img = NULL;
+	fdf.rows = NULL;
 	return (fdf);
 }
 
@@ -35,6 +36,9 @@ int main(int argc, char **argv)
 {
 	t_fdf	fdf;
 	fdf = init_fdf();
+	if (argc != 2)
+		ft_error(&fdf, "Usage: ./fdf <map.fdf>\n", ERR_USER);
+	parse_map(&fdf, argv[1]);
 	init_mlx(&fdf);
 	return (EXIT_SUCCESS);
 }

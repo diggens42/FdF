@@ -22,9 +22,12 @@ void	free_fdf(t_fdf *fdf)
 	fdf->mlx = NULL;
 }
 
-void	ft_error(t_fdf *fdf, char *err_msg)
+void	ft_error(t_fdf *fdf, char *err_msg, int err_code)
 {
-	ft_putstr_fd(err_msg, STDERR_FILENO);
+	if (err_code == ERR_SYS)
+		perror(err_msg);
+	else
+		ft_putstr_fd(err_msg, STDERR_FILENO);
 	free_fdf(fdf);
 	exit(EXIT_FAILURE);
 }

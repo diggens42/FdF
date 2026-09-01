@@ -23,14 +23,18 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
+# define ERR_USER 0
+# define ERR_SYS 1
+
 typedef struct s_fdf
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	t_list		*rows;
 } t_fdf;
 
 //utils
-void	ft_error(t_fdf *fdf, char *err_msg);
+void	ft_error(t_fdf *fdf, char *err_msg, int err_code);
 void	free_fdf(t_fdf *fdf);
 
 #endif
