@@ -67,14 +67,14 @@ clean:
 	@echo "$(RED) $(RM) ./MLX42/build $(RESET)"
 	@echo "$(YELLOW)Deleting MLX42 files finished.$(RESET)"
 
-	@$(MAKE) clean -C ./Libft
+	@$(MAKE) clean -C ./libft
 
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(RED) $(RM) $(NAME) $(RESET)"
 	@echo "$(YELLOW)Deleting executable finished.$(RESET)"
 
-	@$(MAKE) fclean -C ./Libft
+	@$(MAKE) fclean -C ./libft
 
 re: fclean
 	@$(MAKE) all

@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/29 17:01:19 by fwahl             #+#    #+#             */
-/*   Updated: 2026/08/29 17:01:19 by fwahl            ###   ########.fr       */
+/*   Created: 2026/09/01 21:51:56 by fwahl             #+#    #+#             */
+/*   Updated: 2026/09/01 21:51:56 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../include/fdf.h"
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "MLX42/MLX42.h"
-# include "libft.h"
-
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
-
-typedef struct s_fdf
+void	free_fdf(t_fdf *fdf)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-} t_fdf;
+	if (fdf->img)
+		mlx_delete_image(fdf->mlx, fdf->img);
+	fdf->img = NULL;
+	if (fdf->mlx)
+		mlx_terminate(fdf->mlx);
+	fdf->mlx = NULL;
+}
 
-//utils
-void	ft_error(t_fdf *fdf, char *err_msg);
-void	free_fdf(t_fdf *fdf);
-
-#endif
+void	ft_error(t_fdf *fdf, char *err_msg)
+{
+	ft_putstr_fd(err_msg, STDERR_FILENO);
+	free_fdf(fdf);
+	exit(EXIT_FAILURE);
+}
