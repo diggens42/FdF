@@ -43,13 +43,17 @@ typedef struct s_fdf
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_list		*rows;
 	t_map		map;
-
 } t_fdf;
 
 //utils
 void	ft_error(t_fdf *fdf, char *err_msg, int err_code);
 void	free_fdf(t_fdf *fdf);
+
+//map
+void	allocate_map(t_fdf *fdf, int width, int height);
+
+//parse
+void	parse_map(t_fdf *fdf, char *map_path);
 
 #endif
