@@ -12,10 +12,10 @@
 
 #include "../include/fdf.h"
 
-void	parse_row_content(t_fdf *fdf, char *line, int y)
+static void	parse_row_content(t_fdf *fdf, char *line, int y)
 {
 	char	**split;
-	int	x;
+	int		x;
 
 	split = ft_split(line, ' ');
 	if (!split)
@@ -24,42 +24,17 @@ void	parse_row_content(t_fdf *fdf, char *line, int y)
 		ft_error(fdf, "fdf: map rows have different widths\n", ERR_USER);
 	x = -1;
 	while (++x < fdf->map.width)
-		// this is where shit gets parsed and put into the map
+		// parse the token and store it in the map
 	ft_free_strarray(split);
 	split = NULL;
 }
 
-static int	parse_row_width(t_fdf *fdf, char *line)
-{
-	char	**split;
-	int		width;
-
-	split = ft_split(line, ' ');
-	if (!split)
-		ft_error(fdf, "malloc failed in row_width", ERR_SYS);
-	width = ft_strarray_len(split);
-	ft_free_strarray(split);
-	split = NULL;
-	return (width);
-}
-
-static void	add_row(t_fdf *fdf, t_list *rows, char *line)
-{
-	t_list	*node;
-
-	node = ft_lstnew(line);
-	if (!node)
-	{
-		free(line);
-		ft_error(fdf, "malloc failed in add_row", ERR_SYS);
-	}
-	ft_lstadd_back(&rows, node);
-}
 
 static void read_them_lines(t_fdf *fdf, t_list *rows, int fd)
 {
 	char	*line;
 	char	*trimmed;
+	t_list	*node;
 
 	line = get_next_line(fd);
 	while (line)
@@ -68,35 +43,39 @@ static void read_them_lines(t_fdf *fdf, t_list *rows, int fd)
 		free(line);
 		if (!trimmed)
 			ft_error(fdf, "malloc failed in read_lines", ERR_SYS);
-		if (trimmed[0])
-			add_row(fdf, &rows, trimmed);
-		else
+		if (!trimmed[0])
 			free(trimmed);
+		else
+		{
+			node = ft_lstnew(trimmed);
+			if (!node)
+				ft_error(fdf, "malloc failed in read_lines", ERR_SYS);
+			ft_lstadd_back(&fdf->rows, node);
+		}
 		line = get_next_line(fd);
 	}
 }
 
 void	parse_map(t_fdf *fdf, char *map_path)
 {
-	t_list	*rows;
-	t_list	*current;
+	t_list	*cur;
 	int		fd;
 	int		y;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		ft_error(fdf, map_path, ERR_SYS);
-	read_them_lines(fdf, &rows, fd);
+	read_lines(fdf, fd);
 	close(fd);
-	if (!rows)
+	if (!fdf->rows)
 		ft_error(fdf, "fdf: map is empty\n", ERR_USER);
-	allocate_map(fdf, parse_row_width(fdf, rows->content), ft_lstsize(rows));
-	current = rows;
+	cur = fdf->rows;
 	y = 0;
-	while (current)
+	while (cur)
 	{
-		parse_row_content(fdf, current->content, y++);
-		current = current->next;
+		store_row(fdf, cur->content, y++);
+		cur = cur->next;
 	}
-	ft_lstclear(&rows, free);
+	ft_lstclear(&fdf->rows, free);
+	//map shit
 }
