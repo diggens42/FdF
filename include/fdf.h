@@ -26,11 +26,26 @@
 # define ERR_USER 0
 # define ERR_SYS 1
 
+typedef struct s_point
+{
+	int			z;
+	uint32_t	color;
+}	t_point;
+
+typedef struct s_map
+{
+	t_point	*pts;
+	int		width;
+	int		height;
+} t_map;
+
 typedef struct s_fdf
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_list		*rows;
+	t_map		map;
+
 } t_fdf;
 
 //utils
