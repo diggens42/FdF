@@ -38,7 +38,8 @@ typedef struct s_fdf
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_map		map;
-	t_list		*rows;
+	t_list		*map_rows;
+	char		**map_tokens;
 } t_fdf;
 
 //utils

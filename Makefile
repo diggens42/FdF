@@ -19,7 +19,10 @@ RM		=	rm -rf
 MLX_URL =	https://github.com/codam-coding-college/MLX42.git
 
 NAME	=	fdf
-SRCS	=	./src/main.c 
+SRCS	=	./src/main.c \
+			./src/parse.c \
+			./src/map.c \
+			./src/utils.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/fdf.h
 
