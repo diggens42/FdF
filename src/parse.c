@@ -34,7 +34,6 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 {
 	int	width;
 	int	x;
-	int	*z;
 
 	fdf->map_tokens = ft_split(line, ' ');
 	if (!fdf->map_tokens)
@@ -45,9 +44,9 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 	else if (width != fdf->map.width)
 		ft_error(fdf, "fdf: map rows have different widths\n", ERR_USER);
 	x = -1;
-	z = NULL;
+	//fix long line later
 	while (++x < fdf->map.width)
-		z = parse_map_token(fdf, fdf->map_tokens[x]);
+		fdf->map.points[y * fdf->map.width + x] = parse_map_token(fdf, fdf->map_tokens[x]);
 	ft_free_strarray(fdf->map_tokens);
 	fdf->map_tokens = NULL;
 }
@@ -100,5 +99,5 @@ void	parse_map(t_fdf *fdf, char *map_path)
 		cur = cur->next;
 	}
 	ft_lstclear(&fdf->map_rows, free);
-	//map shit
+	set_map_bounds(&fdf->map);
 }

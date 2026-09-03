@@ -28,9 +28,11 @@
 
 typedef struct s_map
 {
-	int		z;
+	int		*points;
 	int		width;
 	int		height;
+	int		z_min;
+	int		z_max;
 } t_map;
 
 typedef struct s_fdf
@@ -48,6 +50,8 @@ void	free_fdf(t_fdf *fdf);
 
 //map
 void	allocate_map(t_fdf *fdf, int width, int height);
+void	set_map_bounds(t_map *map);
+void	free_map(t_map *map);
 
 //parse
 void	parse_map(t_fdf *fdf, char *map_path);

@@ -14,6 +14,14 @@
 
 void	free_fdf(t_fdf *fdf)
 {
+	if (fdf->map_rows)
+		ft_lstclear(&fdf->map_rows, free);
+	if (fdf->map_tokens)
+		ft_free_strarray(fdf->map_tokens);
+	fdf->map_tokens = NULL;
+	if (fdf->map_rows)
+		ft_lstclear(&fdf->map_rows, free);
+	free_map(&fdf->map);
 	if (fdf->img)
 		mlx_delete_image(fdf->mlx, fdf->img);
 	fdf->img = NULL;
