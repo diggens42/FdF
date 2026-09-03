@@ -28,6 +28,13 @@ t_fdf	init_fdf(void)
 
 	fdf.mlx = NULL;
 	fdf.img = NULL;
+	fdf.map.points = NULL;
+	fdf.map.width = 0;
+	fdf.map.height = 0;
+	fdf.map.z_min = 0;
+	fdf.map.z_max = 0;
+	fdf.map_rows = NULL;
+	fdf.map_tokens = NULL;
 	return (fdf);
 }
 

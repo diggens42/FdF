@@ -40,7 +40,7 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 		ft_error(fdf, "malloc failed in store_row", ERR_SYS);
 	width = ft_strarray_len(fdf->map_tokens);
 	if (y == 0)
-		map_alloc(fdf, width, ft_lstsize(fdf->map_rows));
+		allocate_map(fdf, width, ft_lstsize(fdf->map_rows));
 	else if (width != fdf->map.width)
 		ft_error(fdf, "fdf: map rows have different widths\n", ERR_USER);
 	x = -1;
@@ -52,7 +52,7 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 }
 
 
-static void read_them_lines(t_fdf *fdf, t_list *rows, int fd)
+static void read_them_lines(t_fdf *fdf, int fd)
 {
 	char	*line;
 	char	*trimmed;
@@ -87,7 +87,7 @@ void	parse_map(t_fdf *fdf, char *map_path)
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		ft_error(fdf, map_path, ERR_SYS);
-	read_them_lines(fdf, fdf->map_rows, fd);
+	read_them_lines(fdf, fd);
 	close(fd);
 	if (!fdf->map_rows)
 		ft_error(fdf, "fdf: map is empty\n", ERR_USER);
