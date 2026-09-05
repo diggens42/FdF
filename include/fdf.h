@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
@@ -25,6 +26,20 @@
 
 # define ERR_USER 0
 # define ERR_SYS 1
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_point;
+
+typedef struct s_cam
+{
+	double	zoom;
+	int		x_offset;
+	int		y_offset;
+} t_cam;
 
 typedef struct s_map
 {
@@ -40,6 +55,7 @@ typedef struct s_fdf
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_map		map;
+	t_cam		cam;
 	t_list		*map_rows;
 	char		**map_tokens;
 } t_fdf;

@@ -35,6 +35,9 @@ t_fdf	init_fdf(void)
 	fdf.map.z_max = 0;
 	fdf.map_rows = NULL;
 	fdf.map_tokens = NULL;
+	fdf.cam.zoom = 1.0;
+	fdf.cam.x_offset = 0;
+	fdf.cam.y_offset = 0;
 	return (fdf);
 }
 
@@ -52,12 +55,11 @@ static void	check_args(t_fdf *fdf, int argc, char **argv)
 int main(int argc, char **argv)
 {
 	t_fdf	fdf;
+
 	fdf = init_fdf();
 	check_args(&fdf, argc, argv);
-	if (argc != 2)
-		ft_error(&fdf, "Usage: ./fdf <map.fdf>\n", ERR_USER);
 	parse_map(&fdf, argv[1]);
 	init_mlx(&fdf);
-	fdf_free(&fdf);
+	free_fdf(&fdf);
 	return (EXIT_SUCCESS);
 }

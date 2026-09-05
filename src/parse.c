@@ -37,7 +37,7 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 
 	fdf->map_tokens = ft_split(line, ' ');
 	if (!fdf->map_tokens)
-		ft_error(fdf, "malloc failed in store_row", ERR_SYS);
+		ft_error(fdf, "malloc failed in parse_row_content\n", ERR_SYS);
 	width = ft_strarray_len(fdf->map_tokens);
 	if (y == 0)
 		allocate_map(fdf, width, ft_lstsize(fdf->map_rows));
@@ -64,7 +64,7 @@ static void read_them_lines(t_fdf *fdf, int fd)
 		trimmed = ft_strtrim(line, " \t\n\r\v\f");
 		free(line);
 		if (!trimmed)
-			ft_error(fdf, "malloc failed in read_lines", ERR_SYS);
+			ft_error(fdf, "malloc failed in read_them_lines", ERR_SYS);
 		if (!trimmed[0])
 			free(trimmed);
 		else

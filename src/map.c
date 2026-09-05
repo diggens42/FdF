@@ -18,7 +18,7 @@ void	allocate_map(t_fdf *fdf, int width, int height)
 		ft_error(fdf, "fdf: map has no points\n", ERR_USER);
 	fdf->map.points = ft_calloc((size_t)width * height, sizeof(int));
 	if (!fdf->map.points)
-		ft_error(fdf, "malloc failed in map_alloc", ERR_SYS);
+		ft_error(fdf, "malloc failed in allocate_map\n", ERR_SYS);
 	fdf->map.width = width;
 	fdf->map.height = height;
 }
