@@ -22,7 +22,10 @@ NAME	=	fdf
 SRCS	=	./src/main.c \
 			./src/parse.c \
 			./src/map.c \
-			./src/utils.c
+			./src/utils.c \
+			./src/draw.c \
+			./src/project.c
+			
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/fdf.h
 

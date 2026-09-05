@@ -34,6 +34,15 @@ typedef struct s_point
 	int	z;
 }	t_point;
 
+typedef struct s_line
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+}	t_line;
+
 typedef struct s_cam
 {
 	double	zoom;
@@ -60,16 +69,22 @@ typedef struct s_fdf
 	char		**map_tokens;
 } t_fdf;
 
-//utils
+//utils.c
 void	ft_error(t_fdf *fdf, char *err_msg, int err_code);
 void	free_fdf(t_fdf *fdf);
 
-//map
+//map.c
 void	allocate_map(t_fdf *fdf, int width, int height);
 void	set_map_bounds(t_map *map);
 void	free_map(t_map *map);
 
-//parse
+//parse.c
 void	parse_map(t_fdf *fdf, char *map_path);
+
+//project.c
+t_point	project_point(t_fdf *fdf, t_point point);
+
+//draw.c
+void	draw_line(mlx_image_t *img, t_point a, t_point b);
 
 #endif
