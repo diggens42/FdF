@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:55:59 by fwahl             #+#    #+#             */
-/*   Updated: 2026/09/05 18:52:25 by fwahl            ###   ########.fr       */
+/*   Updated: 2026/09/05 19:04:49 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 		ft_error(fdf, "fdf: map rows have different widths\n", ERR_USER);
 	x = -1;
 	while (++x < fdf->map.width)
-		fdf->map.points[y * fdf->map.width + x] = parse_map_token(fdf, fdf->map_tokens[x]);
+	{
+		fdf->map.points[y * fdf->map.width + x]
+			= parse_map_token(fdf, fdf->map_tokens[x]);
+	}
 	ft_free_strarray(fdf->map_tokens);
 	fdf->map_tokens = NULL;
 }

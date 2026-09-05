@@ -83,9 +83,15 @@ void	free_map(t_map *map);
 void	parse_map(t_fdf *fdf, char *map_path);
 
 //project.c
-t_point	project_point(t_fdf *fdf, t_point point);
+t_point	project_point(t_fdf *fdf, int x, int y);
 
 //draw.c
 void	draw_line(mlx_image_t *img, t_point a, t_point b);
+
+//render.c
+void	render(t_fdf *fdf);
+
+//mlx.c
+void	init_mlx(t_fdf *fdf);
 
 #endif

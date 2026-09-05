@@ -24,8 +24,10 @@ SRCS	=	./src/main.c \
 			./src/map.c \
 			./src/utils.c \
 			./src/draw.c \
-			./src/project.c
-			
+			./src/project.c \
+			./src/mlx.c \
+			./src/render.c
+
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/fdf.h
 
