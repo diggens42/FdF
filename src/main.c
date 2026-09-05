@@ -38,13 +38,26 @@ t_fdf	init_fdf(void)
 	return (fdf);
 }
 
+static void	check_args(t_fdf *fdf, int argc, char **argv)
+{
+	char	*dot;
+
+	if (argc != 2)
+		ft_error(fdf, "Usage: ./fdf <map.fdf>\n", ERR_USER);
+	dot = ft_strrchr(argv[1], '.');
+	if (!dot || ft_strcmp(dot, ".fdf") != 0)
+		ft_error(fdf, "fdf: map file must end in .fdf\n", ERR_USER);
+}
+
 int main(int argc, char **argv)
 {
 	t_fdf	fdf;
 	fdf = init_fdf();
+	check_args(&fdf, argc, argv);
 	if (argc != 2)
 		ft_error(&fdf, "Usage: ./fdf <map.fdf>\n", ERR_USER);
 	parse_map(&fdf, argv[1]);
 	init_mlx(&fdf);
+	fdf_free(&fdf);
 	return (EXIT_SUCCESS);
 }
