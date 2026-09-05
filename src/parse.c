@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:55:59 by fwahl             #+#    #+#             */
-/*   Updated: 2026/09/05 19:04:49 by fwahl            ###   ########.fr       */
+/*   Updated: 2026/09/05 19:45:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 
 	fdf->map_tokens = ft_split(line, ' ');
 	if (!fdf->map_tokens)
-		ft_error(fdf, "malloc failed in parse_row_content\n", ERR_SYS);
+		ft_error(fdf, "malloc failed in parse_row_content", ERR_SYS);
 	width = ft_strarray_len(fdf->map_tokens);
 	if (y == 0)
 		allocate_map(fdf, width, ft_lstsize(fdf->map_rows));
@@ -83,7 +83,7 @@ static void	read_them_lines(t_fdf *fdf, int fd)
 		{
 			node = ft_lstnew(trimmed);
 			if (!node)
-				ft_error(fdf, "malloc failed in read_lines", ERR_SYS);
+				ft_error(fdf, "malloc failed in read_them_lines", ERR_SYS);
 			ft_lstadd_back(&fdf->map_rows, node);
 		}
 		line = get_next_line(fd);

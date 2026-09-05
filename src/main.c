@@ -50,6 +50,7 @@ int	main(int argc, char **argv)
 	check_args(&fdf, argc, argv);
 	parse_map(&fdf, argv[1]);
 	init_mlx(&fdf);
+	fit_view(fdf);
 	render(&fdf);
 	mlx_loop(fdf.mlx);
 	free_fdf(&fdf);

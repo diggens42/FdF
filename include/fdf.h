@@ -23,7 +23,8 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
-# define COLOR_LINE 0x000000FF
+# define COLOR_LINE 0xFFFFFFFF
+# define FIT_MARGIN 0.9
 
 # define ERR_USER 0
 # define ERR_SYS 1
@@ -32,7 +33,6 @@ typedef struct s_point
 {
 	int	x;
 	int	y;
-	int	z;
 }	t_point;
 
 typedef struct s_line
