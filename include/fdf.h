@@ -49,7 +49,7 @@ typedef struct s_cam
 	double	zoom;
 	int		x_offset;
 	int		y_offset;
-} t_cam;
+}	t_cam;
 
 typedef struct s_map
 {
@@ -58,7 +58,7 @@ typedef struct s_map
 	int		height;
 	int		z_min;
 	int		z_max;
-} t_map;
+}	t_map;
 
 typedef struct s_fdf
 {
@@ -68,7 +68,7 @@ typedef struct s_fdf
 	t_cam		cam;
 	t_list		*map_rows;
 	char		**map_tokens;
-} t_fdf;
+}	t_fdf;
 
 //utils.c
 void	ft_error(t_fdf *fdf, char *err_msg, int err_code);

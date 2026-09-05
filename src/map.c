@@ -12,6 +12,9 @@
 
 #include "../include/fdf.h"
 
+/**
+ * allocates the point grid and saves the map dimensions
+ */
 void	allocate_map(t_fdf *fdf, int width, int height)
 {
 	if (width <= 0 || height <= 0)
@@ -23,6 +26,9 @@ void	allocate_map(t_fdf *fdf, int width, int height)
 	fdf->map.height = height;
 }
 
+/**
+ * finds the lowest and highest altitude in the map
+ */
 void	set_map_bounds(t_map *map)
 {
 	int	i;
@@ -41,6 +47,9 @@ void	set_map_bounds(t_map *map)
 	}
 }
 
+/**
+ * frees the point grid and resets the map values
+ */
 void	free_map(t_map *map)
 {
 	if (map->points)

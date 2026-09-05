@@ -52,7 +52,7 @@ static void	check_args(t_fdf *fdf, int argc, char **argv)
 		ft_error(fdf, "fdf: map file must end in .fdf\n", ERR_USER);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
 

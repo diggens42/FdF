@@ -6,12 +6,15 @@
 /*   By: fwahl <fwahl@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:55:59 by fwahl             #+#    #+#             */
-/*   Updated: 2026/09/01 22:55:59 by fwahl            ###   ########.fr       */
+/*   Updated: 2026/09/05 18:52:25 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
+/**
+ * checks that a token is a valid signed number and returns it as int
+ */
 static int	parse_map_token(t_fdf *fdf, char *tok)
 {
 	int	i;
@@ -30,6 +33,10 @@ static int	parse_map_token(t_fdf *fdf, char *tok)
 	return (ft_atoi(tok));
 }
 
+/**
+ * splits one row into tokens, allocates the map on the first row
+ * and stores the altitudes of that row in the grid
+ */
 static void	parse_row_content(t_fdf *fdf, char *line, int y)
 {
 	int	width;
@@ -44,15 +51,17 @@ static void	parse_row_content(t_fdf *fdf, char *line, int y)
 	else if (width != fdf->map.width)
 		ft_error(fdf, "fdf: map rows have different widths\n", ERR_USER);
 	x = -1;
-	//fix long line later
 	while (++x < fdf->map.width)
 		fdf->map.points[y * fdf->map.width + x] = parse_map_token(fdf, fdf->map_tokens[x]);
 	ft_free_strarray(fdf->map_tokens);
 	fdf->map_tokens = NULL;
 }
 
-
-static void read_them_lines(t_fdf *fdf, int fd)
+/**
+ * reads the file line by line, trims the whitespace
+ * and stores every non empty line in map_rows
+ */
+static void	read_them_lines(t_fdf *fdf, int fd)
 {
 	char	*line;
 	char	*trimmed;
@@ -78,6 +87,10 @@ static void read_them_lines(t_fdf *fdf, int fd)
 	}
 }
 
+/**
+ * opens the map file, reads all rows, fills the point grid
+ * and sets the z bounds
+ */
 void	parse_map(t_fdf *fdf, char *map_path)
 {
 	t_list	*cur;
