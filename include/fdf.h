@@ -23,6 +23,7 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+# define COLOR_LINE 0x000000FF
 
 # define ERR_USER 0
 # define ERR_SYS 1
